@@ -16,6 +16,8 @@
         $age = filter_has_var(INPUT_POST, "age");
         $city_born = filter_has_var(INPUT_POST, "city_born");
         $salary = filter_has_var(INPUT_POST, "salary");
+        $email = filter_has_var(INPUT_POST, "email");
+        $college = filter_has_var(INPUT_POST, "college");
 
         try {
           // connect to the databse
@@ -28,6 +30,8 @@
           if ($age) $query = $query.",age ";
           if ($city_born) $query = $query.",city_born ";
           if ($salary) $query = $query.",salary ";
+          if ($email) $query = $query.",email ";
+          if ($college) $query = $query.",college ";
 
           // if we didn't get any name
           if ((strlen($first) == 0) && (strlen($last) == 0)) {
