@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>People Information</title>
+  </head>
+  <body>
+    <form action="display.php" method="post">
+      <fieldset>
+        <legend>User input</legend>
+        <p>
+          <label>First name:</label>
+          <input name="first" type="text" />
+        </p>
+        <p>
+          <label>Last name:</label>
+          <input name="last" type="text" />
+        </p>
+        <p>
+          <label>Table Border:</label>
+          <select name="border">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </p>
+        <p>
+          <label>Display Format</label>
+          <input type="radio" name="format" value="firstlast" checked /> First and Last
+          <input type="radio" name="format" value="firstonly" /> First
+          <input type="radio" name="format" value="lastonly" /> Last
+        </p>
+        <p>
+          <label>Display Information</label>
+          <input type="checkbox" name="id" value="id" checked /> ID
+          <input type="checkbox" name="gender" value="gender" checked /> Gender
+          <input type="checkbox" name="age" value="age" checked /> Age
+          <input type="checkbox" name="city_born" value="city_born" checked /> Born in City
+          <input type="checkbox" name="salary" value="salary" checked /> Salary
+        </p>
+        <p>
+          <input type="submit" value="Submit" />
+        </p>
+      </fieldset>
+    </form>
+  </body>
+</html>
