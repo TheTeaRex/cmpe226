@@ -7,7 +7,7 @@
   <body>
     <p>
       <?php
-		function doingQuery($query) {
+		function doingQuery($query, $sub = array()) {
 		  print("<p><b>Query done:</b> ".$query."</p>");
 		  // connect to the databse
           $con = new PDO("mysql:host=localhost;dbname=acid", "acid", "sesame");
@@ -15,7 +15,12 @@
 
           // querying the database
           $ps = $con->prepare($query);
-		  $ps->execute();
+		  if (empty($sub)) {
+		    $ps->execute();
+		  }
+		  else {
+			$ps->execute($sub);
+		  }
           $data = $ps->fetchAll(PDO::FETCH_ASSOC);
 		  
 		  return $data;
@@ -52,6 +57,20 @@
 		}
 		
         try {
+		  $first = filter_input(INPUT_POST, "first");
+          $last = filter_input(INPUT_POST, "last");
+		  $query = "SELECT tp.TeacherID, tp.PhoneNum, t.FirstName, t.LastName ".
+				   "FROM teacher_phonenum as tp, teacher as t ".
+				   "WHERE tp.TeacherID = t.TeacherID ".
+				   "AND (t.FirstName = :first ".
+				   "OR t.LastName = :last) ".
+				   "ORDER BY tp.TeacherID";
+		  $sub = array(':first' => $first, ':last' => $last);
+		  $data = doingQuery($query, $sub);
+		  $page = parsingData($data);
+		  print $page;
+
+		  print ("<p>---------------------------Join Queries as PDO prepared statements-------------------------------</p>");
           $array = array ("SELECT tp.TeacherID, tp.PhoneNum, t.FirstName, t.LastName ".
 						  "FROM teacher_phonenum as tp, teacher as t ".
 						  "WHERE tp.TeacherID = t.TeacherID ".
