@@ -110,6 +110,39 @@
 		  $page = $page . "</tr>";
 		}
 		
+		class DeptAge {
+		  private $DeptName;
+		  private $Age;
+		  
+		  public function getName() {return $this->DeptName;}
+		  public function getAge() {return $this->Age;}
+		}
+		
+		function createDeptAgeTableRow(DeptAge $t, &$page) {
+		  $page = $page . "<tr>";
+		  $page = $page . "<td>" . $t->getName() . "</td>";
+		  $page = $page . "<td>" . $t->getAge() . "</td>";
+		  $page = $page . "</tr>";
+		}
+		
+		class DeptTSAge {
+		  private $DeptName;
+		  private $TAge;
+		  private $SAge;
+		  
+		  public function getName() {return $this->DeptName;}
+		  public function getTAge() {return $this->TAge;}
+		  public function getSAge() {return $this->SAge;}
+		}
+		
+		function createDeptTSAgeTableRow(DeptTSAge $t, &$page) {
+		  $page = $page . "<tr>";
+		  $page = $page . "<td>" . $t->getName() . "</td>";
+		  $page = $page . "<td>" . $t->getTAge() . "</td>";
+		  $page = $page . "<td>" . $t->getSAge() . "</td>";
+		  $page = $page . "</tr>";
+		}
+
 		try {
 		  $first = filter_input(INPUT_POST, "first");
           $last = filter_input(INPUT_POST, "last");
@@ -190,6 +223,33 @@
 		  $page = $page . "<tr>" . "<th>ClassID</th>" . "<th>ClassName</th>" . "<th>FirstName</th>" . "<th>LastName</th>" . "</tr>";
 		  while ($class = $ps->fetch()) {
 		    createClassTableRow($class, $page);
+		  }
+		  $page = $page . "</table>";
+		  print $page;
+		  
+		  $query = "SELECT d.DeptName, AVG(t.Age) as Age ".
+				   "FROM Deparment as d, teacher as t ".
+				   "WHERE d.DeptID = t.DeptID ".
+				   "GROUP BY d.DeptID";
+		  $ps = doingQuery($query, "DeptAge");
+		  $page = "<table border=1>";
+		  $page = $page . "<tr>" . "<th>DeptName</th>" . "<th>AverageAge</th>" . "</tr>";
+		  while ($class = $ps->fetch()) {
+		    createDeptAgeTableRow($class, $page);
+		  }
+		  $page = $page . "</table>";
+		  print $page;
+		  
+		  $query = "SELECT d.DeptName, AVG(t.Age) as TAge, AVG(s.Age) as SAge ".
+				   "FROM Deparment as d, teacher as t, Student as s ".
+				   "WHERE d.DeptID = t.DeptID AND t.DeptID = s.DeptID ".
+				   "GROUP BY d.DeptID ".
+				   "HAVING AVG(t.Age) < 50 AND AVG(s.Age) > 20";
+		  $ps = doingQuery($query, "DeptTSAge");
+		  $page = "<table border=1>";
+		  $page = $page . "<tr>" . "<th>DeptName</th>" . "<th>AverageTeacherAge</th>" . "<th>AverageStudentAge</th>" . "</tr>";
+		  while ($class = $ps->fetch()) {
+		    createDeptTSAgeTableRow($class, $page);
 		  }
 		  $page = $page . "</table>";
 		  print $page;
