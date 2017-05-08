@@ -21,7 +21,7 @@
   <div id="header">
     <div class="container">
       <div id="logo">
-        <h1><a href="#">The Retail Store</a></h1>
+        <h1><a href="index.php">The Retail Store</a></h1>
         <span class="tag">By Team ACID</span>
       </div>
     </div>
@@ -32,9 +32,10 @@
     <div id="content" class="container">
       <section>
         <header>
-          <h2>Customer Login:</h2>
+          <h2>Employee Login:</h2>
         </header>
-        <form action="portal.php" method="post">
+        <p><font color="red">* User/Password is not valid</font></p>
+        <form action="eportal.php" method="post">
           <p>
             <label>User ID:</label><br>
             <input name="userid" type="text"/>
@@ -55,7 +56,7 @@
   <div id="footer">
     <div class="container">
       <section>
-        <p><a href="elogin.php">Employee Portal</a></p>
+        <p><a href="index.php">Customer Portal</a></p>
       </section>
     </div>
   </div>

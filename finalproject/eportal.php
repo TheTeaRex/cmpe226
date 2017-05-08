@@ -39,15 +39,15 @@
           $userid = filter_input(INPUT_POST, "userid");
           $pw = filter_input(INPUT_POST, "password");
 
-          $query = "SELECT t.MemberID ".
-                   "FROM member as t ".
-                   "WHERE t.MemberID = :userid ".
-                   "AND t.MemberPassword = :pw";
+          $query = "SELECT t.EmployeeID ".
+                   "FROM employee as t ".
+                   "WHERE t.EmployeeID = :userid ".
+                   "AND t.EmployeePassword = :pw";
           $sub = array(':userid' => $userid, ':pw' => $pw);
           try {
             $data = doingPrepareQuery($query, $sub);
             if (empty($data)) {
-              header('Location:error.php');
+              header('Location:eerror.php');
             } else {
               print_r($data);
             }
@@ -64,7 +64,7 @@
   <div id="footer">
     <div class="container">
       <section>
-        <p><a href="elogin.php">Employee Portal</a></p>
+        <p><a href="index.php">Customer Portal</a></p>
       </section>
     </div>
   </div>
