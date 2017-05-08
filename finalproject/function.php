@@ -1,7 +1,7 @@
 <?php
   function doingPrepareQuery($query, $sub = array()) {
     // connect to the databse
-    $con = new PDO("mysql:host=localhost;dbname=acid", "acid", "acid@226");
+    $con = new PDO("mysql:host=localhost;dbname=acid", "acid", "seasame");
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // querying the database
@@ -19,7 +19,7 @@
 
   function doingQuery($query) {
     // connect to the databse
-      $con = new PDO("mysql:host=localhost;dbname=acid", "acid", "acid@226");
+      $con = new PDO("mysql:host=localhost;dbname=acid", "acid", "seasame");
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
       // querying

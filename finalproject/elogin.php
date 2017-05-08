@@ -33,11 +33,8 @@
       <section>
         <header>
           <h2>Employee Login:</h2>
-            <?php if (!empty($_POST)): ?>
-              <p><font color="red">* User/Password is not valid</font></p>
-            <?php endif; ?>
         </header>
-        <form action="" method="post">
+        <form action="eportal.php" method="post">
           <p>
             <label>User ID:</label><br>
             <input name="userid" type="text"/>

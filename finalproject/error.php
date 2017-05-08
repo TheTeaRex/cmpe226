@@ -1,7 +1,3 @@
-<?php
-  include 'function.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -22,40 +18,36 @@
 <body>
 
   <!--header-->
-    <div id="header">
-      <div class="container">
-        <div id="logo">
-          <h1><a>The Retail Store</a></h1>
-          <span class="tag">By Team ACID</span>
-        </div>
+  <div id="header">
+    <div class="container">
+      <div id="logo">
+        <h1><a href="index.php">The Retail Store</a></h1>
+        <span class="tag">By Team ACID</span>
       </div>
     </div>
+  </div>
 
   <!--main-->
   <div id="main">
     <div id="content" class="container">
       <section>
-        <?php
-          $userid = filter_input(INPUT_POST, "userid");
-          $pw = filter_input(INPUT_POST, "password");
-
-          $query = "SELECT t.MemberID ".
-                   "FROM member as t ".
-                   "WHERE t.MemberID = :userid ".
-                   "AND t.MemberPassword = :pw";
-          $sub = array(':userid' => $userid, ':pw' => $pw);
-          try {
-            $data = doingPrepareQuery($query, $sub);
-            if (empty($data)) {
-              header('Location:error.php');
-            } else {
-              print_r($data);
-            }
-          }
-          catch (PDOException $ex) {
-            echo 'ERROR: '.$ex->getMessage();
-          }
-        ?>
+        <header>
+          <h2>Customer Login:</h2>
+          <p><font color="red">* User/Password is not valid</font></p>
+        </header>
+        <form action="portal.php" method="post">
+          <p>
+            <label>User ID:</label><br>
+            <input name="userid" type="text"/>
+          </p>
+          <p>
+            <label>Password:</label><br>
+            <input name="password" type="password"/>
+          </p>
+          <p>
+            <input type="submit" value="Enter"/>
+          </p>
+        </form>
       </section>
     </div>
   </div>
