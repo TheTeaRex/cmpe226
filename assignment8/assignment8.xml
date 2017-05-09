@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<university name="San Jose State University"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="assignment8.xsd">
+    <department name="CMPE">
+        <class name="Database Systems" id="226">
+            <professor>
+                <id>010001</id>
+                <first>Ronald</first>
+                <last>Mak</last>
+            </professor>
+            <student admissionQ="Fall" admissionY="2011">
+                <id>151345</id>
+                <first>John</first>
+                <last>Smith</last>
+            </student>
+            <student admissionQ="Fall" admissionY="2010">
+                <id>135846</id>
+                <first>Mary</first>
+                <last>Jane</last>
+            </student>
+        </class>
+        <class name="Software Systems Engineering" id="202">
+            <professor>
+                <id>010051</id>
+                <first>Paul</first>
+                <last>Nguyen</last>
+            </professor>
+            <student admissionQ="Fall" admissionY="2012">
+                <id>184321</id>
+                <first>Peeta</first>
+                <last>Mellark</last>
+            </student>
+            <student admissionQ="Fall" admissionY="2010">
+                <id>135846</id>
+                <first>Mary</first>
+                <last>Jane</last>
+            </student>
+        </class>
+    </department>
+    <department name="BUS">
+        <class name="Business, Economics and Society" id="200">
+            <professor>
+                <id>012485</id>
+                <first>Tom</first>
+                <last>Jones</last>
+            </professor>
+            <student admissionQ="Spring" admissionY="2011">
+                <id>213448</id>
+                <first>Mary</first>
+                <last>Robins</last>
+            </student>
+        </class>
+    </department>
+</university>
