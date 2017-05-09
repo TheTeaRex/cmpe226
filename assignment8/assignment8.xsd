@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:complexType name="student_type">
+    <xs:sequence>
+        <xs:element name="id" type="xs:positiveInteger"/>
+        <xs:element name="first" type="xs:string"/>
+        <xs:element name="last" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="admissionQ">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="Fall"/>
+                <xs:enumeration value="Winter"/>
+                <xs:enumeration value="Spring"/>
+                <xs:enumeration value="Summer"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="admissionY" type="xs:gYear"/>
+</xs:complexType>
+
+<xs:complexType name="professor_type">
+    <xs:sequence>
+        <xs:element name="id" type="xs:positiveInteger"/>
+        <xs:element name="first" type="xs:string"/>
+        <xs:element name="last" type="xs:string"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="class_type">
+    <xs:sequence>
+        <xs:element ref="professor" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="student" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="id" type="xs:positiveInteger"/>
+</xs:complexType>
+
+<xs:complexType name="department_type">
+    <xs:sequence>
+        <xs:element ref="class" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="university_type">
+    <xs:sequence>
+        <xs:element ref="department" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+
+<xs:element name="student" type="student_type"/>
+<xs:element name="professor" type="professor_type"/>
+<xs:element name="class" type="class_type"/>
+<xs:element name="department" type="department_type"/>
+<xs:element name="university" type="university_type"/>
+</xs:schema>

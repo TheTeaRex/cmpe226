@@ -1,0 +1,71 @@
+db.scores.insert([
+  { id: 151345, department: "CMPE", classid: "226", score: 80},
+  { id: 135846, department: "CMPE", classid: "226", score: 86 },
+  { id: 421588, department: "CMPE", classid: "226", score: 96 },
+  { id: 543185, department: "CMPE", classid: "226", score: 96 },
+  { id: 184321, department: "CMPE", classid: "202", score: 90 },
+  { id: 312458, department: "CMPE", classid: "202", score: 81 },
+  { id: 246138, department: "CMPE", classid: "202", score: 76 },
+  { id: 213448, department: "BUS", classid: "200", score: 88 },
+  { id: 123481, department: "BUS", classid: "200", score: 70 },
+  { id: 231548, department: "BUS", classid: "200", score: 99 },
+])
+
+db.sales.insert([
+  { id: 7845, category: "kitchen", price: 25},
+  { id: 7561, category: "kitchen", price: 100},
+  { id: 5674, category: "bathroom", price: 68},
+  { id: 2181, category: "kitchen", price: 250},
+  { id: 8456, category: "bedroom", price: 199},
+  { id: 2105, category: "bathroom", price: 9},
+  { id: 5648, category: "kitchen", price: 51},
+  { id: 3150, category: "dinning", price: 50},
+  { id: 7463, category: "kitchen", price: 39},
+  { id: 9711, category: "bedroom", price: 21},
+  { id: 6421, category: "bedroom", price: 36},
+  { id: 5421, category: "dinning", price: 78},
+  { id: 3245, category: "dinning", price: 99},
+])
+
+db.scores.find().pretty()
+db.sales.find().pretty()
+
+db.scores.find({department: "CMPE"}, {_id: 0}).sort({score: 1}).pretty()
+db.scores.find({department: "CMPE", classid: "226"}, {_id: 0, id: 1, score: 1}).sort({score: -1}).pretty()
+db.scores.find({}, {_id: 0, classid: 1, score: 1}).sort({classid: 1}).pretty()
+
+db.sales.find({category: "kitchen"}, {_id: 0}).sort({price: 1}).pretty()
+db.sales.find({price: {$lt: 50}}, {_id: 0}).sort({score: -1}).pretty()
+db.sales.find({$and: [{price: {$gt: 20}},{price: {$lt: 150}}]}, {_id: 0}).sort({classid: 1}).pretty()
+
+db.scores.aggregate([
+  { $match: { department: "CMPE" } },
+  { $group: { _id: "$classid", count: { $sum: 1} } }
+])
+
+db.scores.mapReduce(
+  function() { emit( this.classid, this.score ); },
+  function(key, values) { return Array.avg(values) },
+  {
+    query: { department: "CMPE" },
+	out: "average_score"
+  }
+)
+
+db.average_score.find().pretty()
+
+db.sales.aggregate([
+  { $match: {} },
+  { $group: { _id: "$category", total: { $sum: "$price"} } }
+])
+
+db.sales.mapReduce(
+  function() { emit( this.category, this.price ); },
+  function(key, values) { return Array.avg(values) },
+  {
+    query: {},
+	out: "average_price"
+  }
+)
+
+db.average_price.find().pretty()
