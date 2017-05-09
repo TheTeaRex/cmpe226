@@ -35,6 +35,7 @@
                 header('Location:eerror.php?ls=1');
               } else {
                 setPageCookie('emp_id', $data[0]['EmployeeID']);
+                $id = $data[0]['EmployeeID'];
                 $first = $data[0]['FirstName'];
                 $last = $data[0]['LastName'];
               }
@@ -53,6 +54,7 @@
               if (empty($data)) {
                 header('Location:elogin.php?ls=1');
               } else {
+                $id = $_COOKIE['emp_id'];
                 $first = $data[0]['FirstName'];
                 $last = $data[0]['LastName'];
               }
@@ -63,6 +65,7 @@
           }
 
           // everything should come after this line
+          // can access employee id with $id
           $output = '
             <header>
               <h2>Welcome %first% %last%!</h2>

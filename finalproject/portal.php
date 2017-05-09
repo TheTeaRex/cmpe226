@@ -36,6 +36,7 @@
                 header('Location:index.php?ls=1');
               } else {
                 setPageCookie('cus_id', $data[0]['MemberID']);
+                $id = $data[0]['MemberID'];
                 $first = $data[0]['FirstName'];
                 $last = $data[0]['LastName'];
                 $level = $data[0]['MembershipName'];
@@ -56,6 +57,7 @@
               if (empty($data)) {
                 header('Location:index.php?ls=1');
               } else {
+                $id = $_COOKIE['cus_id'];
                 $first = $data[0]['FirstName'];
                 $last = $data[0]['LastName'];
                 $level = $data[0]['MembershipName'];
@@ -67,6 +69,7 @@
           }
 
           // everything should come after this line
+          // can access member id with $id
           $output = '
             <header>
               <h2>Welcome %first% %last%!</h2>
