@@ -155,7 +155,7 @@
                        'WHERE t.MemberID = :userid '.
                        'AND t.TransactionDate = :tdate '.
                        'AND t.TransactionID = c.TransactionID '.
-                       'AND t.TransactionType = "purchase" '.
+                       'AND (t.TransactionType = "Online" OR t.TransactionType = "WalkIn")  '.
                        'AND c.ProductID = p.ProductID '.
                        'ORDER BY p.ProductName';
               $sub = array(':userid' => $id, ':tdate' => $tdate);
