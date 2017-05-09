@@ -32,7 +32,7 @@
             try {
               $data = doingPrepareQuery($query, $sub);
               if (empty($data)) {
-                header('Location:eerror.php?ls=1');
+                header('Location:elogin.php?ls=1');
               } else {
                 setPageCookie('emp_id', $data[0]['EmployeeID']);
                 $id = $data[0]['EmployeeID'];
