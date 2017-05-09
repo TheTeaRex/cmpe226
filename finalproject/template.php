@@ -89,5 +89,5 @@
 		};
 		$output = str_replace("%replaceMe%", $sub, $output);
 		print($output);
-	};
+  };
 ?>

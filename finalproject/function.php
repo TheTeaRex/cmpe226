@@ -28,4 +28,12 @@
 
     return $data;
   }
+
+  function clearCookie($name) {
+    setcookie($name, 'derp', time() - 3600, '/');
+  }
+
+  function setPageCookie($name, $value, $dur=86400) {
+    setcookie($name, $value, time() + $dur, '/');
+  }
 ?>

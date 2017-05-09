@@ -1,4 +1,8 @@
-<?php include 'template.php'; ?>
+<?php
+  include 'function.php';
+  clearCookie('emp_id');
+  include 'template.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -11,7 +15,10 @@
   <?php printHeader(); ?>
 
   <!--main-->
-  <?php printMain("Employee"); ?>
+  <?php
+    $failed = filter_input(INPUT_GET, 'ls');
+    printMain("Employee", $failed);
+  ?>
 
   <!--footer-->
   <?php printFooter('customer'); ?>
