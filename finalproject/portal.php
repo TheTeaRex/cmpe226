@@ -87,7 +87,7 @@
 
           // products purchased before
           $continue = true;
-          $query = 'SELECT p.ProductName, p.ProductPrice '.
+          $query = 'SELECT DISTINCT p.ProductName, p.ProductPrice '.
                    'FROM saleTransaction as t, contains as c, product as p '.
                    'WHERE t.MemberID = :userid '.
                    'AND t.TransactionID = c.TransactionID '.
@@ -155,7 +155,7 @@
                        'WHERE t.MemberID = :userid '.
                        'AND t.TransactionDate = :tdate '.
                        'AND t.TransactionID = c.TransactionID '.
-                       'AND t.TransactionType = "purchase" '.
+                       'AND (t.TransactionType = "Online" OR t.TransactionType = "WalkIn")  '.
                        'AND c.ProductID = p.ProductID '.
                        'ORDER BY p.ProductName';
               $sub = array(':userid' => $id, ':tdate' => $tdate);
@@ -233,7 +233,7 @@
                        'WHERE t.MemberID = :userid '.
                        'AND (t.TransactionDate BETWEEN :stdate AND :etdate) '.
                        'AND t.TransactionID = c.TransactionID '.
-                       'AND t.TransactionType = "purchase" '.
+                       'AND (t.TransactionType = "Online" OR t.transactionType = "Walkin") '.
                        'AND c.ProductID = p.ProductID '.
                        'ORDER BY p.ProductName';
               $sub = array(':userid' => $id, ':stdate' => $stdate, ':etdate' => $etdate);
